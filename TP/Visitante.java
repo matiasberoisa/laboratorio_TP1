@@ -1,4 +1,4 @@
-public abstract class Visitante {
+public class Visitante {
 
     public void visitarExpress(Express unExpress) {
 
