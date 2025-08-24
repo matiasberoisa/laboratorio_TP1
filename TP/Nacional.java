@@ -16,7 +16,7 @@ public class Nacional extends Mudanza {
         }
     }
 
-    public void aceptarVisitante(Visitante unVisitante) {
-        unVisitante.visitarNacional(this);
+    public void accept(Visitor visitor) {
+        visitor.visitNacional(this);
     }
 }

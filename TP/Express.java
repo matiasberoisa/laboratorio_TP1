@@ -19,8 +19,8 @@ public class Express extends Mudanza {
         }
     }
 
-    public void aceptarVisitante(Visitante unVisitante) {
-        unVisitante.visitarExpress(this);
+    public void accept(Visitor visitor) {
+        visitor.visitExpress(this);
     }
 
 }

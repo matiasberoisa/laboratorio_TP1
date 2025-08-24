@@ -16,7 +16,7 @@ public class Internacional extends Mudanza {
             this.precio += costoAduana;
     }
 
-    public void aceptarVisitante(Visitante unVisitante) {
-        unVisitante.visitarInternacional(this);
+    public void accept(Visitor visitor) {
+        visitor.visitInternacional(this);
     }
 }
