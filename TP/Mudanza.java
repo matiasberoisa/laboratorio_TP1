@@ -1,4 +1,3 @@
-package laboratorio_TP1.TP;
 
 import java.util.Date;
 
@@ -17,6 +16,10 @@ public abstract class Mudanza {
 
     public void calcularKm(int kmRecorrido) {
         this.km += kmRecorrido;
+    }
+
+    public void aceptarVisitante(Visitante unVisitante) {
+
     }
 
 }
