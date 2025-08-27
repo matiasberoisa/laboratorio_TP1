@@ -1,20 +1,20 @@
 public class ImpuestosVisitor implements Visitor {
 
     public void visitExpress(Express unExpress) {
-        if (unExpress.carga && unExpress.descarga) {
-            unExpress.precio += (unExpress.precio % 20);
+        if (unExpress.isCarga() && unExpress.isDescarga()) {
+            unExpress.setPrecio(unExpress.getPrecio() + (unExpress.getPrecio() % 20));
         }
     }
 
     public void visitNacional(Nacional unNacional) {
-        if (unNacional.km > 2000) {
-            unNacional.precio += (unNacional.precio % 5);
+        if (unNacional.getKm() > 2000) {
+            unNacional.setPrecio(unNacional.getPrecio() + (unNacional.getPrecio() % 5));
         }
     }
 
     public void visitInternacional(Internacional unInternacional) {
-        if (!unInternacional.aduana) {
-            unInternacional.precio += (unInternacional.costoAduana % 50);
+        if (!unInternacional.isAduana()) {
+            unInternacional.setPrecio(unInternacional.getPrecio() + (unInternacional.getPrecio() % 10));
         }
     }
 }

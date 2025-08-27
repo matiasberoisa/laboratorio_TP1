@@ -1,20 +1,20 @@
 public class DescuentoVisitor implements Visitor {
 
     public void visitExpress(Express unExpress) {
-        if (unExpress.carga && unExpress.descarga) {
-            unExpress.precio -= (unExpress.precio % 10);
+        if (unExpress.isCarga() && unExpress.isDescarga()) {
+            unExpress.setPrecio(unExpress.getPrecio() - (unExpress.getPrecio() % 10));
         }
     }
 
     public void visitNacional(Nacional unNacional) {
-        if (unNacional.canObjMax < 20) {
-            unNacional.precio -= (unNacional.precio % 5);
+        if (unNacional.getCanObjMax() < 20) {
+            unNacional.setPrecio(unNacional.getPrecio() - (unNacional.getPrecio() % 5));
         }
     }
 
     public void visitInternacional(Internacional unInternacional) {
-        if (!unInternacional.aduana) {
-            unInternacional.precio -= (unInternacional.precio % 15);
+        if (!unInternacional.isAduana()) {
+            unInternacional.setPrecio(unInternacional.getPrecio() - (unInternacional.getPrecio() % 15));
         }
     }
 }

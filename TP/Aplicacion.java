@@ -1,7 +1,4 @@
 import java.util.Date;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class Aplicacion {
 
@@ -36,18 +33,6 @@ public class Aplicacion {
         for (Mudanza mudanza : lasMudanzas) {
             mudanza.accept(visitorDescuento);
         }
-
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        Runnable tarea = () -> {
-            System.out.println("la tarea es el cambio de precio");
-            double nPrecio = 0.2; // lo que quiero actualizar
-            for (Mudanza mudanza : lasMudanzas) {
-                System.out.println("en la mudanza " + mudanza.origen + " el precio era: " + mudanza.precio);
-                mudanza.actualizarPrecio(nPrecio);
-            }
-
-        };
-        scheduler.scheduleAtFixedRate(tarea, 5, 10, TimeUnit.SECONDS);
     }
 
 }
