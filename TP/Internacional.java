@@ -29,7 +29,7 @@ public class Internacional extends Mudanza {
 
             scheduler.schedule(() -> {
                 this.tramiteAduana = true;
-                calcularPrecio(); // aplicar costo aduana
+                calcularPrecio(); 
                 System.out.println("Tramites de aduana completos costo:$" + this.costoAduana);
             }, tiempoAduana, TimeUnit.SECONDS);
         }

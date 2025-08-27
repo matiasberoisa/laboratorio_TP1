@@ -33,6 +33,7 @@ public class Aplicacion {
         for (Mudanza mudanza : lasMudanzas) {
             mudanza.accept(visitorDescuento);
         }
+        //Queda aplicar metodos del otro visitor y hacer ejemplos 
     }
 
 }
