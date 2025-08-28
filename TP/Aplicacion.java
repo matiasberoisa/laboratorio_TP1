@@ -37,3 +37,25 @@ public class Aplicacion {
     }
 
 }
+//ejemplo
+        // // Creamos mudanza internacional con aduana
+        // Internacional mudanzaInt = new Internacional(
+        //         "Neuquén", "Santiago de Chile",
+        //         800,        // km
+        //         50000,      // precio base
+        //         new Date(),
+        //         "Camión",
+        //         true,       // requiere aduana
+        //         15000       // costo aduana
+        // );
+
+        // System.out.println("Precio inicial: $" + mudanzaInt.getPrecio());
+
+        // // Simular trámites de aduana que tardan 5 seg
+        // mudanzaInt.hacerTramitesAduana(5);
+
+        // try {
+        //     Thread.sleep(7000); // esperar lo suficiente para que se ejecute el scheduler
+        // } catch (InterruptedException e) {
+        //     e.printStackTrace();
+        // }
