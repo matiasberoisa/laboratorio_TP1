@@ -32,6 +32,7 @@ public class Internacional extends Mudanza {
                 calcularPrecio(); 
                 System.out.println("Tramites de aduana completos costo:$" + this.costoAduana);
             }, tiempoAduana, TimeUnit.SECONDS);
+            scheduler.shutdown();
         }
 
     }
