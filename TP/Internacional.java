@@ -15,7 +15,7 @@ public class Internacional extends Mudanza {
 
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
-    public Internacional(String origen, String destino, int km, int precio, Date horario, String tipoTransporte,
+    public Internacional(String origen, String destino, int km, double precio, Date horario, String tipoTransporte,
             boolean aduana, int costoAduana) {
         super(origen, destino, km, precio, horario, tipoTransporte);
         this.aduana = aduana;

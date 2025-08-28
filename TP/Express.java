@@ -3,7 +3,7 @@ import java.util.Date;
 public class Express extends Mudanza {
     private boolean carga, descarga;
 
-    public Express(String origen, String destino, int km, int precio, Date horario, String tipoTransporte,
+    public Express(String origen, String destino, int km, double precio, Date horario, String tipoTransporte,
             boolean carga, boolean descarga) {
         super(origen, destino, km, precio, horario, tipoTransporte);
         this.carga = carga;

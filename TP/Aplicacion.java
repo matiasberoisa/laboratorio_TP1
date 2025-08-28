@@ -7,7 +7,7 @@ public class Aplicacion {
 
         // creo mudanzas
         // Mudanza Express
-        Mudanza express = new Express(
+        Express express = new Express(
                 "Buenos Aires",
                 "La Plata",
                 60,
@@ -15,47 +15,32 @@ public class Aplicacion {
                 new Date(),
                 "Camión",
                 true, // carga
-                false // descarga
+                true // descarga
         );
 
         // Mudanza Internacional
-        Mudanza internacional = new Internacional("Rio Negro", "Santiago de Chile", 1400, 120000, new Date(),
+        Internacional internacional = new Internacional("Rio Negro", "Santiago de Chile", 1400, 120000, new Date(),
                 "Avión", true, 25000);
 
         // Mudanza Nacional
-        Mudanza nacional = new Nacional("Córdoba", "Mendoza", 700, 45000, new Date(), "Camion", 50);
+        Nacional nacional = new Nacional("Córdoba", "Mendoza", 700, 45000, new Date(), "Camion", 50);
 
         lasMudanzas[0] = express;
         lasMudanzas[1] = internacional;
         lasMudanzas[2] = nacional;
-
+ System.out.println("Mudanza Express - Precio Final: $" + express.getPrecio());
         DescuentoVisitor visitorDescuento = new DescuentoVisitor();
         for (Mudanza mudanza : lasMudanzas) {
             mudanza.accept(visitorDescuento);
         }
-        //Queda aplicar metodos del otro visitor y hacer ejemplos 
+
+        ImpuestosVisitor visitorImpuestos = new ImpuestosVisitor();
+        for (Mudanza mudanza : lasMudanzas) {
+            mudanza.accept(visitorImpuestos);
+        }
+         System.out.println("Mudanza Express - Precio Final: $" + express.getPrecio());
+        // visitorDescuento.visitExpress(express);
+        // System.out.println("Mudanza Express con Descuento - Precio Final: $" + express.getPrecio());
     }
 
 }
-//ejemplo
-        // // Creamos mudanza internacional con aduana
-        // Internacional mudanzaInt = new Internacional(
-        //         "Neuquén", "Santiago de Chile",
-        //         800,        // km
-        //         50000,      // precio base
-        //         new Date(),
-        //         "Camión",
-        //         true,       // requiere aduana
-        //         15000       // costo aduana
-        // );
-
-        // System.out.println("Precio inicial: $" + mudanzaInt.getPrecio());
-
-        // // Simular trámites de aduana que tardan 5 seg
-        // mudanzaInt.hacerTramitesAduana(5);
-
-        // try {
-        //     Thread.sleep(7000); // esperar lo suficiente para que se ejecute el scheduler
-        // } catch (InterruptedException e) {
-        //     e.printStackTrace();
-        // }

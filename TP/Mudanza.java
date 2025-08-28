@@ -3,7 +3,8 @@ import java.util.Date;
 
 public abstract class Mudanza {
     private String origen, destino;
-    private int km, precio;
+    private double precio;
+    private int km;
     private Date horario;
     private String tipoTransporte;
 
@@ -11,7 +12,7 @@ public abstract class Mudanza {
 
     }
 
-    public Mudanza(String origen, String destino, int km, int precio, Date horario, String tipoTransporte) {
+    public Mudanza(String origen, String destino, int km, double precio, Date horario, String tipoTransporte) {
         this.origen = origen;
         this.destino = destino;
         this.km = km;
@@ -50,11 +51,11 @@ public abstract class Mudanza {
         this.km = km;
     }
 
-    public int getPrecio() {
+    public double getPrecio() {
         return this.precio;
     }
 
-    public void setPrecio(int precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 
