@@ -45,22 +45,6 @@ public class Aplicacion {
         System.out.println("-----------------------------------------------------");
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
-        // Aca el metodo concurrente
-        for (Mudanza mudanza : lasMudanzas) {
-            Runnable tarea = () -> {
-                System.out.println("Actualizando precios para " +
-                        mudanza.getClass().getName());
-                mudanza.setPrecio(mudanza.getPrecio() + (mudanza.getPrecio() * 0.1));
-                System.out
-                        .println("Mudanza " + mudanza.getClass().getName() + "- Precio Final: $" +
-                                mudanza.getPrecio());
-                System.out.println();
-
-            };
-            // esperamos 2 segundos y despues hacemos la 'tarea' cada 5s
-            scheduler.scheduleWithFixedDelay(tarea, 0, 5, TimeUnit.SECONDS);
-        }
-
         // Aca hacemos las visitas de descuento:
         System.out.println("Visitas de descuento:");
         visitorDescuento.visitExpress(express);
@@ -78,9 +62,21 @@ public class Aplicacion {
         System.out.println("Mudanza Express - Precio Final: $" + express.getPrecio());
         System.out.println("Mudanza Nacional - Precio Final: $" + nacional.getPrecio());
         System.out.println("Mudanza Internacional - Precio Final: $" + internacional.getPrecio());
-        // System.out.println("Mudanza Express con Descuento - Precio Final: $" +
-        // express.getPrecio());
 
+        // Aca el metodo concurrente
+        for (Mudanza mudanza : lasMudanzas) {
+            Runnable tarea = () -> {
+                System.out.println("Actualizando precios para " +
+                        mudanza.getClass().getName());
+                mudanza.setPrecio(mudanza.getPrecio() + (mudanza.getPrecio() * 0.1));
+                System.out
+                        .println("Mudanza " + mudanza.getClass().getName() + "- Precio Final: $" +
+                                mudanza.getPrecio());
+                System.out.println();
+
+            };
+            // esperamos 2 segundos y despues hacemos la 'tarea' cada 5s
+            scheduler.scheduleWithFixedDelay(tarea, 0, 5, TimeUnit.SECONDS);
+        }
     }
-
 }
