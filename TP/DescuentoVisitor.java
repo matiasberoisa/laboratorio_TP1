@@ -8,7 +8,7 @@ public class DescuentoVisitor implements Visitor {
     }
 
     public void visitNacional(Nacional unNacional) {
-        if (unNacional.getCanObjMax() < 20) {
+        if (unNacional.getCantObjetos() < unNacional.getCanObjMax()) {
             double descuento = unNacional.getPrecio() * 5 / 100;
             unNacional.setPrecio(unNacional.getPrecio() - descuento);
         }

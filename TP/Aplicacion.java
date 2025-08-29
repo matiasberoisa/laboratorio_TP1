@@ -1,4 +1,7 @@
 import java.util.Date;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Aplicacion {
 
@@ -10,7 +13,7 @@ public class Aplicacion {
         Express express = new Express(
                 "Buenos Aires",
                 "La Plata",
-                60,
+                1501,
                 15000,
                 new Date(),
                 "Camión",
@@ -28,19 +31,56 @@ public class Aplicacion {
         lasMudanzas[0] = express;
         lasMudanzas[1] = internacional;
         lasMudanzas[2] = nacional;
- System.out.println("Mudanza Express - Precio Final: $" + express.getPrecio());
-        DescuentoVisitor visitorDescuento = new DescuentoVisitor();
-        for (Mudanza mudanza : lasMudanzas) {
-            mudanza.accept(visitorDescuento);
-        }
 
+        DescuentoVisitor visitorDescuento = new DescuentoVisitor();
         ImpuestosVisitor visitorImpuestos = new ImpuestosVisitor();
         for (Mudanza mudanza : lasMudanzas) {
+            mudanza.accept(visitorDescuento);
             mudanza.accept(visitorImpuestos);
         }
-         System.out.println("Mudanza Express - Precio Final: $" + express.getPrecio());
-        // visitorDescuento.visitExpress(express);
-        // System.out.println("Mudanza Express con Descuento - Precio Final: $" + express.getPrecio());
+
+        System.out.println("Mudanza Express - Precio Inicial: $" + express.getPrecio());
+        System.out.println("Mudanza Nacional - Precio Inicial: $" + nacional.getPrecio());
+        System.out.println("Mudanza Internacional - Precio Inicial: $" + internacional.getPrecio());
+        System.out.println("-----------------------------------------------------");
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+        // Aca el metodo concurrente
+        for (Mudanza mudanza : lasMudanzas) {
+            Runnable tarea = () -> {
+                System.out.println("Actualizando precios para " +
+                        mudanza.getClass().getName());
+                mudanza.setPrecio(mudanza.getPrecio() + (mudanza.getPrecio() * 0.1));
+                System.out
+                        .println("Mudanza " + mudanza.getClass().getName() + "- Precio Final: $" +
+                                mudanza.getPrecio());
+                System.out.println();
+
+            };
+            // esperamos 2 segundos y despues hacemos la 'tarea' cada 5s
+            scheduler.scheduleWithFixedDelay(tarea, 0, 5, TimeUnit.SECONDS);
+        }
+
+        // Aca hacemos las visitas de descuento:
+        System.out.println("Visitas de descuento:");
+        visitorDescuento.visitExpress(express);
+        visitorDescuento.visitInternacional(internacional);
+        visitorDescuento.visitNacional(nacional);
+        System.out.println("Mudanza Express - Precio Final: $" + express.getPrecio());
+        System.out.println("Mudanza Nacional - Precio Final: $" + nacional.getPrecio());
+        System.out.println("Mudanza Internacional - Precio Final: $" + internacional.getPrecio());
+        System.out.println();
+        // Aca hacemos las visitas de impuestos:
+        System.out.println("Visitas de impuestos:");
+        visitorImpuestos.visitExpress(express);
+        visitorImpuestos.visitInternacional(internacional);
+        visitorImpuestos.visitNacional(nacional);
+        System.out.println("Mudanza Express - Precio Final: $" + express.getPrecio());
+        System.out.println("Mudanza Nacional - Precio Final: $" + nacional.getPrecio());
+        System.out.println("Mudanza Internacional - Precio Final: $" + internacional.getPrecio());
+        // System.out.println("Mudanza Express con Descuento - Precio Final: $" +
+        // express.getPrecio());
+
     }
 
 }

@@ -1,19 +1,9 @@
 import java.util.Date;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class Internacional extends Mudanza {
     private boolean aduana;
     private int costoAduana;
-
-    public ScheduledExecutorService getScheduler() {
-        return this.scheduler;
-    }
-
     private boolean tramiteAduana;
-
-    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     public Internacional(String origen, String destino, int km, double precio, Date horario, String tipoTransporte,
             boolean aduana, int costoAduana) {
@@ -21,20 +11,6 @@ public class Internacional extends Mudanza {
         this.aduana = aduana;
         this.costoAduana = costoAduana;
         this.tramiteAduana = false;
-    }
-
-    public void hacerTramitesAduana(int tiempoAduana) {
-        if (!this.aduana) {
-            System.out.println("Realizando tramites ...");
-
-            scheduler.schedule(() -> {
-                this.tramiteAduana = true;
-                calcularPrecio(); 
-                System.out.println("Tramites de aduana completos costo:$" + this.costoAduana);
-            }, tiempoAduana, TimeUnit.SECONDS);
-            scheduler.shutdown();
-        }
-
     }
 
     // setters y getters generador automaticamente
